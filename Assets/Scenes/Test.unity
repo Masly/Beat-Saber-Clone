@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ad8773d0e581449bfdc6d09e4645b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToSlice: {fileID: 1438755255}
+  crossMat: {fileID: 2100000, guid: d3293c07c46938149bd6b68f6f5ab4d1, type: 2}
+  planeTransform: {fileID: 12351124}
 --- !u!4 &12351124
 Transform:
   m_ObjectHideFlags: 0
@@ -833,6 +836,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4351021064e0b4bba0c9ea59fdbfd9, type: 3}
+--- !u!1 &1438755255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 838247117108204988, guid: 2190a0d9d1935ee4fae79d9a6b8a0b00, type: 3}
+  m_PrefabInstance: {fileID: 838247117083746927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1510755679
 GameObject:
   m_ObjectHideFlags: 0
