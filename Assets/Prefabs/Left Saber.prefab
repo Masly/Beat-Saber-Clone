@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftSaber
       objectReference: {fileID: 0}
+    - target: {fileID: 5759325820370580566, guid: c446af60a576bbf40aab0d1e6923c3f7, type: 3}
+      propertyPath: forceMultiplier
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6411662823496202640, guid: c446af60a576bbf40aab0d1e6923c3f7, type: 3}
       propertyPath: m_RootOrder
       value: 0

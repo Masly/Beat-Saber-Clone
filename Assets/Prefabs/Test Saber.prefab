@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6411662823496202640}
   m_Layer: 0
-  m_Name: TestSaber
+  m_Name: Test Saber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
