@@ -126,10 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba931111d2ea0546bfce5932d73369e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossMat: {fileID: 2100000, guid: be5bedb9f42770549af7600305d316fd, type: 2}
-  upperMaterial: {fileID: 2100000, guid: d3293c07c46938149bd6b68f6f5ab4d1, type: 2}
-  lowerMaterial: {fileID: 2100000, guid: 130cd327cb69f5c4ab2bcdb608fbd58c, type: 2}
-  forceMultiplier: 5
 --- !u!1 &2235586789488789715
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411662823496202640}
+  - component: {fileID: -7123511720613101668}
   m_Layer: 0
   m_Name: Test Saber
   m_TagString: Untagged
@@ -162,6 +159,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7123511720613101668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2235586789488789715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c2554e8dac7a54198d1b25222a9d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeft: 0
 --- !u!1 &4217992530650372553
 GameObject:
   m_ObjectHideFlags: 0

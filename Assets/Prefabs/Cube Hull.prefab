@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2133558923626697540}
   - component: {fileID: 2613068576125655380}
   - component: {fileID: 7887232995465197683}
+  - component: {fileID: 8447511723766206654}
   m_Layer: 0
   m_Name: Cube Hull
   m_TagString: Untagged
@@ -98,3 +99,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8447511723766206654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5001816416393884342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a67b2638f851f43aac546d5d9bff50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeAlive: 3

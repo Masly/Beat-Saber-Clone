@@ -7,13 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7123511720613101668, guid: c446af60a576bbf40aab0d1e6923c3f7, type: 3}
+      propertyPath: isLeft
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1229895593091440787, guid: c446af60a576bbf40aab0d1e6923c3f7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 130cd327cb69f5c4ab2bcdb608fbd58c, type: 2}
     - target: {fileID: 2235586789488789715, guid: c446af60a576bbf40aab0d1e6923c3f7, type: 3}
       propertyPath: m_Name
-      value: LeftSaber
+      value: Left Saber
       objectReference: {fileID: 0}
     - target: {fileID: 5759325820370580566, guid: c446af60a576bbf40aab0d1e6923c3f7, type: 3}
       propertyPath: forceMultiplier

@@ -2,14 +2,24 @@ using EzySlice;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.Assertions;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR;
 
 public class Slicer : MonoBehaviour
 {
+    private SaberManager saber;
+
+    private void Start()
+    {
+        saber = GetComponentInParent<SaberManager>();
+        Assert.IsNotNull(saber);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         StartCoroutine("SliceRoutine", collision);
+        VibrationManager.singleton.SendHapticFeedback(saber.isLeft);
     }
     
     IEnumerator SliceRoutine(Collision collision)
@@ -27,4 +37,6 @@ public class Slicer : MonoBehaviour
             cube.Slice(sliceTarget, entryPoint, cuttingPlaneNormal);
         }       
     }
+
+    
 }
