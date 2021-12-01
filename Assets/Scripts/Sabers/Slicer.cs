@@ -28,19 +28,18 @@ public class Slicer : MonoBehaviour
     IEnumerator SliceRoutine(Collision collision)
     {
         //saves the blade up vector on collision, and the entry point
-        Vector3 startBladeRotation = transform.up.normalized;
+        Vector3 startBladeRotation = saber.transform.up.normalized;
         ContactPoint contact = collision.contacts[0];
         Vector3 entryPoint = contact.point;
         GameObject sliceTarget = collision.collider.gameObject;
         yield return new WaitForSeconds(0.1f);
         //saves the new up vector of the blade after 0.1 seconds
-        Vector3 endBladeRotation = transform.up.normalized;
+        Vector3 endBladeRotation = saber.transform.up.normalized;
         // the cross product of the two vector gives the normal of the plane they reside in.
-        //Double-check if the fact that they have different origins changes the cross product direction (it shouldn't, it shoud change only its lenght)
         Vector3 cuttingPlaneNormal = Vector3.Cross(startBladeRotation, endBladeRotation).normalized;
         if (collision.gameObject.TryGetComponent(out CubeManager cube))
         {
-            cube.Slice(sliceTarget, entryPoint, cuttingPlaneNormal);
+            cube.Slice(sliceTarget, saber.transform.position, cuttingPlaneNormal);
         }       
     }
 
