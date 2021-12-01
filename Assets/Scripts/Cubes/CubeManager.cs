@@ -8,68 +8,48 @@ public class CubeManager : MonoBehaviour
     public float speed=1;
     public Material crossMat;
 
-
+    //no reason to move them to HullManager because the hulls will receive the color from CubeManager anyway
     public Material upperMaterial;
     public Material lowerMaterial;
+    //TODO: change to explosion
     public float forceMultiplier = 20;
     public GameObject hullPrefab;
-   // public GameObject lowerHull;
+
     private void FixedUpdate()
     {
+        //will change to a Lerp later
         transform.Translate(-Vector3.forward*speed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 2);
     }
+    /*this slices the cube mesh, instantiates two hulls prefabs, gives them the appropriate mesh and materials, applies a force to separate them, then hides the cube prefab*/
     public void Slice(GameObject target, Vector3 startingPoint, Vector3 planeNormal)
     {
-
+        // I'm using this plugin: https://github.com/DavidArayan/ezy-slice
         SlicedHull hull = target.Slice(startingPoint, planeNormal, crossMat);
+        //it's tidier to instantiate a prefab and then change its mesh and materials than instantiate a new object with EzySlice.SlicedHull.CreateLowerHull and then add rigidbodies and stuff
         if (hull != null)
         {
-
-            // GameObject tempLowerHull = hull.CreateLowerHull(target, crossMat);
-            //  GameObject tempUpperHull = hull.CreateUpperHull(target, crossMat);
-            //lowerMaterial will be set based on the cube color
             GameObject upperHull = Instantiate(hullPrefab, transform.position, Quaternion.identity);
             upperHull.GetComponent<MeshFilter>().mesh = hull.upperHull;
             upperHull.GetComponent<MeshRenderer>().materials = new Material[] { upperMaterial, crossMat };
-
+            //TODO: change to explosion
             upperHull.GetComponent<Rigidbody>().AddForce(planeNormal * forceMultiplier);
             GameObject lowerHull = Instantiate(hullPrefab, transform.position, Quaternion.identity);
-            //lowerMaterial will be set based on the cube color
+
             lowerHull.GetComponent<MeshFilter>().mesh = hull.lowerHull;
             lowerHull.GetComponent<MeshRenderer>().materials = new Material[] { lowerMaterial, crossMat };
-            
+            //I'm just rotating the plane normal to get a force in the opposite direction
             planeNormal = Quaternion.AngleAxis(180, Vector3.up) * planeNormal;
-
+            //TODO: change to explosion
             lowerHull.GetComponent<Rigidbody>().AddForce(planeNormal * forceMultiplier);
-    
+            
+            //disable the cube to not have it in the way
             target.SetActive(false);
         }
     }
 
-    public void CopyVisuals()
-    {
-
-    }
-}
-
-namespace MyGameObjectExtension
-{
-    public static class CubeExtension
-    {/*
-        public static int WordCount(this String str)
-        {
-            return str.Split(new char[] { ' ', '.', '?' },
-                             StringSplitOptions.RemoveEmptyEntries).Length;
-        }
-        */
-        public static void CopyVisuals(this GameObject obj, GameObject other)
-        {
-            
-        }
-    }
 }
