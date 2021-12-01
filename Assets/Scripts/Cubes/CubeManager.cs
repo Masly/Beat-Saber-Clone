@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CubeManager : MonoBehaviour
 {
-    public float speed=1;
+
     public Material crossMat;
 
     //no reason to move them to HullManager because the hulls will receive the color from CubeManager anyway
@@ -15,11 +15,7 @@ public class CubeManager : MonoBehaviour
     public float forceMultiplier = 20;
     public GameObject hullPrefab;
 
-    private void FixedUpdate()
-    {
-        //will change to a Lerp later
-        transform.Translate(-Vector3.forward*speed);
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {

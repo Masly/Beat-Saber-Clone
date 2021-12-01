@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 838247117108204987}
   - component: {fileID: 8256703283884480924}
   - component: {fileID: 4901274214823920791}
+  - component: {fileID: 2543551976438389247}
   m_Layer: 9
   m_Name: Test Cube
   m_TagString: Untagged
@@ -131,3 +132,19 @@ MonoBehaviour:
   lowerMaterial: {fileID: 2100000, guid: 130cd327cb69f5c4ab2bcdb608fbd58c, type: 2}
   forceMultiplier: 20
   hullPrefab: {fileID: 5001816416393884342, guid: 154c03efd077b804e85ae8497664d2e3, type: 3}
+--- !u!114 &2543551976438389247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838247117108204988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3845cb4ac261e4ea4fe8d318a27fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatSpawned: 0
+  spawnPosition: {x: 0, y: 0, z: 0}
+  distanceInBeats: 10
+  destroyPosition: {x: 0, y: 0, z: 0}
