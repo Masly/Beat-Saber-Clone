@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * JUST FOR TESTING! IT DOESN'T NEED TO BE RELIABLE OR OPTIMIZED
+ */
 public class CubeSpawner : MonoBehaviour
 {
     public GameObject cubePrefab;
     public float spawnInterval = 5;
-    public Transform spawnPosition;
     public Transform destroyPosition;
     float timer =0;
-    //this is horrible but it's just for testing
     int cubeCounter = 0;
+    private void Start()
+    {
+        //this needs to be activated by AudioManager
+        gameObject.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //this timer will get unreliable pretty fast, but it's just for testing
         timer += Time.deltaTime;
         if(timer >= spawnInterval)
         {
@@ -24,8 +28,6 @@ public class CubeSpawner : MonoBehaviour
             if(cube.TryGetComponent<CubeMover>(out cubeMover))
             {
                 cubeMover.beatSpawned = cubeCounter * (int) spawnInterval;
-                cubeMover.spawnPosition = spawnPosition.position;
-                cubeMover.destroyPosition = destroyPosition.position;
                 cubeCounter++;
             }
             

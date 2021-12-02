@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
     public float trackDurationInSeconds = 300;
     public int bpm = 60;
     public float currentBeat;
-    public int beatsToPlayer0 = 8;
     public AudioSource track;
     public GameObject spawner;
     double secondsPlaying;

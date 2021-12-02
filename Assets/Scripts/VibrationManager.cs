@@ -10,8 +10,8 @@ public class VibrationManager : MonoBehaviour
     public static VibrationManager singleton;
 
     //I might want to have them as parameters for the vibration method later
-    public float vibrationAmplitude = 0.5f;
-    public float vibrationDuration = 0.2f;
+    public float defaultAmpitude = 0.5f;
+    public float defaultDuration = 0.2f;
 
 
     UnityEngine.XR.InputDevice leftController;
@@ -58,7 +58,24 @@ public class VibrationManager : MonoBehaviour
 
         }
     }
-    public void SendHapticFeedback(bool isLeft)
+    public void StandardVibrate()
+    {
+        SendHapticFeedback(defaultAmpitude, defaultDuration, bothControllers: true);
+    }
+    public void StandardVibrate(bool isLeft)
+    {
+        SendHapticFeedback(defaultAmpitude, defaultDuration, isLeft:isLeft);
+    }
+    public void CustomVibrate(float vibrationAmplitude, float vibrationDuration)
+    {
+        SendHapticFeedback(vibrationAmplitude, vibrationDuration, bothControllers: true);
+    }
+    public void CustomVibrate(float vibrationAmplitude, float vibrationDuration, bool isLeft)
+    {
+        SendHapticFeedback(vibrationAmplitude, vibrationDuration, isLeft:isLeft);
+    }
+
+    void SendHapticFeedback( float vibrationAmplitude, float vibrationDuration,  bool isLeft = false, uint channel = 0,bool bothControllers = false)
     {
         //I check here if the controllers are present because they might not be connected during Start()
         if (!leftController.isValid || !rightController.isValid)
@@ -74,8 +91,17 @@ public class VibrationManager : MonoBehaviour
         {
             targetDevice = rightController;
         }
-        uint channel = 0;
-        targetDevice.SendHapticImpulse(channel, vibrationAmplitude, vibrationDuration);
+        if (bothControllers)
+        {
+            leftController.SendHapticImpulse(channel, vibrationAmplitude, vibrationDuration);
+            rightController.SendHapticImpulse(channel, vibrationAmplitude, vibrationDuration);
+        }
+        else
+        {
+            targetDevice.SendHapticImpulse(channel, vibrationAmplitude, vibrationDuration);
+        }
+        
     }
+    
 
 }

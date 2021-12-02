@@ -12,16 +12,16 @@ public class Slicer : MonoBehaviour
 
     private void Start()
     {
+        Assert.IsNotNull(GetComponentInParent<SaberManager>());
         saber = GetComponentInParent<SaberManager>();
-        //TODO: I'm pretty sure there is a method that checks in the editor if the required object is there, something like a "required" flag. It's ok to leave it like that now that's just in testing
-        Assert.IsNotNull(saber);
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         StartCoroutine("SliceRoutine", collision);
         if(VibrationManager.singleton!=null)
-            VibrationManager.singleton.SendHapticFeedback(saber.isLeft);
+            VibrationManager.singleton.StandardVibrate(saber.isLeft);
     }
     /*IMPORTANT BUG: IT WORKS ONLY IF THE CUBES ARE IN FRONT OF THE PLAYER*/
     /*This WON'T be the way-to-go method. It might be moved to CubeManager, and it will be just a backup method (the slice direction will be determined with OnCollisionEnter-OnCollisionExit methods)*/

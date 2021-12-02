@@ -1,21 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class CubeMover : MonoBehaviour
 {
     public int beatSpawned;
     //this will be injected on creation for now
-    public Vector3 spawnPosition;
-    //TODO: move it to the manager
-    public int distanceInBeats = 10;
-    public Vector3 destroyPosition;
+    private Vector3 spawnPosition;
+    private Vector3 targetPosition;
+    //value of z needed before destroying the cube
+    public float destroyValue;
+    
+    private int beatsToTravel;
+    public bool debug = false;
+    private GameplaySettings gameplaySettings;
    
 
     //float distanceToCover;
     private void Start()
     {
-       
+        //I'm decoupling the values from GameplaySettings so if I change them outside of this script I have to look only in one place
+        gameplaySettings = GameplaySettings.singleton;
+        spawnPosition = gameplaySettings.spawnPosition.position;
+        Vector3 playerPosition = gameplaySettings.player.transform.position;
+        targetPosition = playerPosition - spawnPosition;
+        destroyValue = playerPosition.z + gameplaySettings.distanceBeforeDestroying;
+        beatsToTravel = gameplaySettings.beatsInAdvance;
+
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -24,47 +36,43 @@ public class CubeMover : MonoBehaviour
     }
     /*
      * ASSUMPTIONS:
-     * Player position in (0,0,0)
-     * This will move from CubeSpawner to PlayerPosition
-     * This will only move on the x axis
+     * This will only move on the z axis
      */
     void SetPosition()
     {
         Vector3 newPosition = spawnPosition;
-        //float beatsSinceSpawned = AudioManager.singleton.currentBeat - beatSpawned;
-        float positionInBeats = AudioManager.singleton.currentBeat - beatSpawned;
+        float BeatsSinceSpawned = AudioManager.singleton.currentBeat - beatSpawned;
         float lerpValue;
         
         
-        if (positionInBeats <= 0)
+        if (BeatsSinceSpawned <= 0)
         {
             newPosition.y = -10;
         }
         else
         {
-            lerpValue = positionInBeats / distanceInBeats;
+            lerpValue = BeatsSinceSpawned / beatsToTravel;
             if(lerpValue <= 1)
             {
-                newPosition.z = Mathf.Lerp(spawnPosition.z, destroyPosition.z, lerpValue);
+                newPosition.z = Mathf.Lerp(spawnPosition.z, targetPosition.z, lerpValue);
 
             }
-            if (lerpValue > 1)
+            //vibrate when on center if debugging
+            if (debug)
             {
-                gameObject.SetActive(false);
-                Destroy(gameObject);
+                if (Mathf.Abs(lerpValue - 0.5f) <= 0.01)
+                {
+                    VibrationManager.singleton.CustomVibrate(0.5f, 0.01f);
+                }
             }
         }
-            /*
-        if (beatsSinceSpawned < 0)
-        {
-            newPosition.y = -10;
-        }
-        else
-        {
-            newPosition.x = Mathf.Lerp(spawnPosition.x, 0, AudioManager.singleton.currentBeat);
-        }
-            */
 
         transform.SetPositionAndRotation(newPosition, transform.rotation);
+        if (transform.position.z > destroyValue)
+        {
+            Debug.Log("Current z: " + transform.position.z + ". Destroy value: " + destroyValue);
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 }
