@@ -12,9 +12,10 @@ public class GameplaySettings : MonoBehaviour
     public Transform spawnPosition;
     //how far will the cube move before being deleted
     public float distanceBeforeDestroying;
+    public int scorePerCube = 5;
 
     public GameObject player;
-    private void Awake()
+    private void Start()
     {
         //Set up singleton
         if (singleton && singleton != this)

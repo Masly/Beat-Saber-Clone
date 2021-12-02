@@ -16,8 +16,6 @@ public class CubeMover : MonoBehaviour
     public bool debug = false;
     private GameplaySettings gameplaySettings;
    
-
-    //float distanceToCover;
     private void Start()
     {
         //I'm decoupling the values from GameplaySettings so if I change them outside of this script I have to look only in one place
@@ -70,7 +68,6 @@ public class CubeMover : MonoBehaviour
         transform.SetPositionAndRotation(newPosition, transform.rotation);
         if (transform.position.z > destroyValue)
         {
-            Debug.Log("Current z: " + transform.position.z + ". Destroy value: " + destroyValue);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

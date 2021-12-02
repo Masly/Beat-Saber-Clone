@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
- * JUST FOR TESTING! IT DOESN'T NEED TO BE RELIABLE OR OPTIMIZED
+ * JUST FOR TESTING! 
  */
 public class CubeSpawner : MonoBehaviour
 {

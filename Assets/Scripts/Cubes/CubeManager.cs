@@ -15,12 +15,12 @@ public class CubeManager : MonoBehaviour
     public float forceMultiplier = 20;
     public GameObject hullPrefab;
 
-
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        GameManager.singleton.AddScore(5);
         Destroy(gameObject, 2);
     }
+
     /*this slices the cube mesh, instantiates two hulls prefabs, gives them the appropriate mesh and materials, applies a force to separate them, then hides the cube prefab*/
     public void Slice(GameObject target, Vector3 startingPoint, Vector3 planeNormal)
     {

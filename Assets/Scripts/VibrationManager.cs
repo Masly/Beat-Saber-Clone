@@ -16,7 +16,6 @@ public class VibrationManager : MonoBehaviour
 
     UnityEngine.XR.InputDevice leftController;
     UnityEngine.XR.InputDevice rightController;
-    bool initialized = false;
 
     void Start()
     {
