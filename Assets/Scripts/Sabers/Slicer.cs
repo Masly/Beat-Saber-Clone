@@ -21,8 +21,7 @@ public class Slicer : MonoBehaviour
     {
 
         StartCoroutine("SliceRoutine", collision);
-        if(VibrationManager.singleton!=null)
-            VibrationManager.singleton.StandardVibrate(saber.isLeft);
+
     }
     /*This WON'T be the way-to-go method. It might be moved to CubeManager, and it will be just a backup method (the slice direction will be determined with OnCollisionEnter-OnCollisionExit methods)*/
     IEnumerator SliceRoutine(Collision collision)

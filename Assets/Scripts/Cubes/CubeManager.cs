@@ -5,20 +5,43 @@ using UnityEngine;
 
 public class CubeManager : MonoBehaviour
 {
-
     public Material crossMat;
-
     //no reason to move them to HullManager because the hulls will receive the color from CubeManager anyway
     public Material upperMaterial;
     public Material lowerMaterial;
     //TODO: change to explosion
     public float forceMultiplier = 20;
     public GameObject hullPrefab;
+    public bool isLeft = false;
+    private void Start()
+    {
+        
+        //get a random true or false
+        isLeft = Random.value < 0.5f;
 
+        if (isLeft)
+        {
+            GetComponent<MeshRenderer>().material = VideoSettings.singleton.leftMaterial;
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().material = VideoSettings.singleton.rightMaterial;
+        }
+        
+        
+    }
+    
     private void OnCollisionEnter(Collision collision)
     {
-        GameManager.singleton.AddScore(5);
-        Destroy(gameObject, 2);
+            //cubes can only collide with sabers and will never collide with anything else
+            if (collision.gameObject.GetComponentInParent<SaberManager>().isLeft == isLeft)
+            {
+                GameManager.singleton.AddScore(5);
+            if (VibrationManager.singleton != null)
+                VibrationManager.singleton.StandardVibrate(isLeft);
+        }
+            Destroy(gameObject, 2);
+
     }
 
     /*this slices the cube mesh, instantiates two hulls prefabs, gives them the appropriate mesh and materials, applies a force to separate them, then hides the cube prefab*/

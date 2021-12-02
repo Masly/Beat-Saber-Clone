@@ -15,6 +15,8 @@ public class GameplaySettings : MonoBehaviour
     public int scorePerCube = 5;
 
     public GameObject player;
+
+
     private void Start()
     {
         //Set up singleton
