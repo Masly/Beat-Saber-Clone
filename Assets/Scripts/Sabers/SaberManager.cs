@@ -6,13 +6,17 @@ using UnityEngine;
 public class SaberManager : MonoBehaviour
 {
     public GameObject blade;
+
+    VideoSettings videoSettings;
     
     public bool isLeft;
     private void OnValidate()
     {
+        
+        videoSettings = GameObject.FindObjectOfType<VideoSettings>();
         if (isLeft)
-            blade.GetComponent<MeshRenderer>().material = VideoSettings.singleton.leftMaterial;
+            blade.GetComponent<MeshRenderer>().material = videoSettings.leftMaterial;
         else
-            blade.GetComponent<MeshRenderer>().material = VideoSettings.singleton.rightMaterial;
+            blade.GetComponent<MeshRenderer>().material = videoSettings.rightMaterial;
     }
 }
