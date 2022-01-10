@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 838247117108204986}
   - component: {fileID: 838247117108204987}
   - component: {fileID: 8256703283884480924}
-  - component: {fileID: 4901274214823920791}
   - component: {fileID: 2543551976438389247}
   m_Layer: 9
   m_Name: Cube
@@ -114,24 +113,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &4901274214823920791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838247117108204988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9b84595608f034f8fd5676ac6c06fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crossMat: {fileID: 2100000, guid: be5bedb9f42770549af7600305d316fd, type: 2}
-  upperMaterial: {fileID: 2100000, guid: d3293c07c46938149bd6b68f6f5ab4d1, type: 2}
-  lowerMaterial: {fileID: 2100000, guid: 130cd327cb69f5c4ab2bcdb608fbd58c, type: 2}
-  forceMultiplier: 20
-  hullPrefab: {fileID: 5001816416393884342, guid: 154c03efd077b804e85ae8497664d2e3, type: 3}
-  isLeft: 0
 --- !u!114 &2543551976438389247
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,9 +13,9 @@ public class CubeManager : MonoBehaviour
     public float forceMultiplier = 20;
     public GameObject hullPrefab;
     public bool isLeft = false;
-    private void Start()
+    protected void Start()
     {
-        
+        //Debug.Log("base start called");
         //get a random true or false
         isLeft = Random.value < 0.5f;
 
@@ -31,8 +31,10 @@ public class CubeManager : MonoBehaviour
         
     }
     
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("base class collision");
+
             //cubes can only collide with sabers and will never collide with anything else
             if (collision.gameObject.GetComponentInParent<SaberManager>().isLeft == isLeft)
             {
