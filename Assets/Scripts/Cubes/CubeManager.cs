@@ -14,12 +14,15 @@ public class CubeManager : MonoBehaviour
     public GameObject hullPrefab;
     public bool isLeft = false;
     public SettingsProvider settingsProvider;
+    public ServiceProvider serviceProvider;
 
     protected void Awake()
     {
         //TODO: inject settings provider from spawner to optimize it
         settingsProvider = GameObject.FindObjectOfType<SettingsProvider>();
         UnityEngine.Assertions.Assert.IsNotNull(settingsProvider);
+        serviceProvider = GameObject.FindObjectOfType<ServiceProvider>();
+        UnityEngine.Assertions.Assert.IsNotNull(serviceProvider);
     }
     protected void Start()
     {
@@ -45,10 +48,9 @@ public class CubeManager : MonoBehaviour
             //cubes can only collide with sabers and will never collide with anything else
             if (collision.gameObject.GetComponentInParent<SaberManager>().isLeft == isLeft)
             {
-                GameManager.singleton.AddScore(5);
-            if (VibrationManager.singleton != null)
-                VibrationManager.singleton.StandardVibrate(isLeft);
-        }
+                serviceProvider.scoreService.AddScore(5);
+                serviceProvider.vibrationService.StandardVibrate(isLeft);
+            }
             Destroy(gameObject, 2);
 
     }

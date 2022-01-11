@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 
-public class VibrationManager : MonoBehaviour
+public class VibrationManager : MonoBehaviour, IVibrationService
 {
-    public static VibrationManager singleton;
 
-    //I might want to have them as parameters for the vibration method later
-    public float defaultAmpitude = 0.5f;
-    public float defaultDuration = 0.2f;
+    [SerializeField]
+    private float defaultAmpitude = 0.5f;
+    [SerializeField]
+    private float defaultDuration = 0.2f;
 
 
     UnityEngine.XR.InputDevice leftController;
@@ -19,11 +19,6 @@ public class VibrationManager : MonoBehaviour
 
     void Start()
     {
-        //Set up singleton
-        if (singleton && singleton != this)
-            Destroy(this);
-        else
-            singleton = this;
 
         //while playing the scene from the editor, the controller won't be initialized. They will be if the level is loaded from the game itself
         SetupDevices();

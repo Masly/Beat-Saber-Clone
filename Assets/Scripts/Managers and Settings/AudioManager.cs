@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
-{
-    public static AudioManager singleton;
-    public float trackDurationInSeconds = 300;
-    public int bpm = 60;
-    public float currentBeat;
-    public AudioSource track;
-    public GameObject spawner;
+public class AudioManager : MonoBehaviour,IAudioService
+{   
+    private float currentBeat;
+    [SerializeField]
+    private int bpm = 60;
+    [SerializeField]
+    private AudioSource track;
+    [SerializeField]
+    private GameObject spawner;
     double secondsPlaying;
     double songStart;
-    
+
+    float IAudioService.currentBeat => currentBeat;
+
     // Start is called before the first frame update
     void Start()
     {
-        //Set up singleton
-        if (singleton && singleton != this)
-            Destroy(this);
-        else
-            singleton = this;
-
         StartCoroutine("StartWithDelay", 3f);
     }
 

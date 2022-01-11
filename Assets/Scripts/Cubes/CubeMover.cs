@@ -45,7 +45,7 @@ public class CubeMover : MonoBehaviour
     void SetPosition()
     {
         Vector3 newPosition = spawnPosition;
-        float BeatsSinceSpawned = AudioManager.singleton.currentBeat - beatSpawned;
+        float BeatsSinceSpawned = cubeManager.serviceProvider.audioService.currentBeat - beatSpawned;
         float lerpValue;
         
         
@@ -66,7 +66,7 @@ public class CubeMover : MonoBehaviour
             {
                 if (Mathf.Abs(lerpValue - 0.5f) <= 0.01)
                 {
-                    VibrationManager.singleton.CustomVibrate(0.5f, 0.01f);
+                    cubeManager.serviceProvider.vibrationService.CustomVibrate(0.5f, 0.01f);
                 }
             }
         }
