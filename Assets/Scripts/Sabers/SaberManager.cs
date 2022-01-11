@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /*all saber data will be here*/
 public class SaberManager : MonoBehaviour
 {
     public GameObject blade;
-
-    VideoSettings videoSettings;
-    
     public bool isLeft;
+
+
     private void OnValidate()
     {
-        
-        videoSettings = GameObject.FindObjectOfType<VideoSettings>();
+        VideoSettings videoSettings = GameObject.FindObjectOfType<SettingsProvider>().videoSettings;
+        Assert.IsNotNull(videoSettings);
         if (isLeft)
             blade.GetComponent<MeshRenderer>().material = videoSettings.leftMaterial;
         else

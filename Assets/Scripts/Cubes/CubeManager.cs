@@ -18,14 +18,17 @@ public class CubeManager : MonoBehaviour
         //Debug.Log("base start called");
         //get a random true or false
         isLeft = Random.value < 0.5f;
+        //Debug: inject videoSettings from spawner to optimize it
+        VideoSettings videoSettings = GameObject.FindObjectOfType<SettingsProvider>().videoSettings;
+        UnityEngine.Assertions.Assert.IsNotNull(videoSettings);
 
         if (isLeft)
         {
-            GetComponent<MeshRenderer>().material = VideoSettings.singleton.leftMaterial;
+            GetComponent<MeshRenderer>().material = videoSettings.leftMaterial;
         }
         else
         {
-            GetComponent<MeshRenderer>().material = VideoSettings.singleton.rightMaterial;
+            GetComponent<MeshRenderer>().material = videoSettings.rightMaterial;
         }
         
         
@@ -33,8 +36,6 @@ public class CubeManager : MonoBehaviour
     
     protected void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("base class collision");
-
             //cubes can only collide with sabers and will never collide with anything else
             if (collision.gameObject.GetComponentInParent<SaberManager>().isLeft == isLeft)
             {
