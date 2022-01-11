@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 /*all saber data will be here*/
 public class SaberManager : MonoBehaviour
@@ -14,11 +12,11 @@ public class SaberManager : MonoBehaviour
     public bool isLeft;
     private void OnValidate()
     {
-        SettingsProvider settingsProvider = GameObject.FindObjectOfType<SettingsProvider>();
-        Assert.IsNotNull(settingsProvider);
+        
+        videoSettings = GameObject.FindObjectOfType<VideoSettings>();
         if (isLeft)
-            blade.GetComponent<MeshRenderer>().material = settingsProvider.leftMaterial;
+            blade.GetComponent<MeshRenderer>().material = videoSettings.leftMaterial;
         else
-            blade.GetComponent<MeshRenderer>().material = settingsProvider.rightMaterial;
+            blade.GetComponent<MeshRenderer>().material = videoSettings.rightMaterial;
     }
 }

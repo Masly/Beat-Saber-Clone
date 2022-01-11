@@ -2,7 +2,6 @@ using EzySlice;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 public class CubeManager : MonoBehaviour
 {
@@ -19,16 +18,17 @@ public class CubeManager : MonoBehaviour
         //Debug.Log("base start called");
         //get a random true or false
         isLeft = Random.value < 0.5f;
- 
-        //TODO: Inject settingsProvider from spawner
-        SettingsProvider settingsProvider = GameObject.FindObjectOfType<SettingsProvider>();
-        Assert.IsNotNull(settingsProvider);
+
         if (isLeft)
-            GetComponent<MeshRenderer>().material = settingsProvider.leftMaterial;
+        {
+            GetComponent<MeshRenderer>().material = VideoSettings.singleton.leftMaterial;
+        }
         else
-            GetComponent<MeshRenderer>().material = settingsProvider.rightMaterial;
-
-
+        {
+            GetComponent<MeshRenderer>().material = VideoSettings.singleton.rightMaterial;
+        }
+        
+        
     }
     
     protected void OnCollisionEnter(Collision collision)
