@@ -13,15 +13,21 @@ public class CubeManager : MonoBehaviour
     public float forceMultiplier = 20;
     public GameObject hullPrefab;
     public bool isLeft = false;
+    public SettingsProvider settingsProvider;
+
+    protected void Awake()
+    {
+        //TODO: inject settings provider from spawner to optimize it
+        settingsProvider = GameObject.FindObjectOfType<SettingsProvider>();
+        UnityEngine.Assertions.Assert.IsNotNull(settingsProvider);
+    }
     protected void Start()
     {
         //Debug.Log("base start called");
         //get a random true or false
         isLeft = Random.value < 0.5f;
-        //Debug: inject videoSettings from spawner to optimize it
-        VideoSettings videoSettings = GameObject.FindObjectOfType<SettingsProvider>().videoSettings;
-        UnityEngine.Assertions.Assert.IsNotNull(videoSettings);
 
+        VideoSettings videoSettings = settingsProvider.videoSettings;
         if (isLeft)
         {
             GetComponent<MeshRenderer>().material = videoSettings.leftMaterial;

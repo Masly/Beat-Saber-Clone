@@ -10,9 +10,14 @@ public class SettingsProvider : MonoBehaviour
     [HideInInspector]
     public VideoSettings videoSettings;
 
+    [HideInInspector]
+    public GameplaySettings gameplaySettings;
+
     private void OnValidate()
     {
         videoSettings = GetComponent<VideoSettings>();
         Assert.IsNotNull(videoSettings);
+        gameplaySettings = GetComponent<GameplaySettings>();
+        Assert.IsNotNull(gameplaySettings);
     }
 }

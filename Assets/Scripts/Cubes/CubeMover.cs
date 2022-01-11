@@ -14,14 +14,20 @@ public class CubeMover : MonoBehaviour
     
     private int beatsToTravel;
     public bool debug = false;
+    private CubeManager cubeManager;
     private GameplaySettings gameplaySettings;
-   
+    private void Awake()
+    {
+        cubeManager = GetComponent<CubeManager>();
+        Assert.IsNotNull(cubeManager);
+    }
+
     private void Start()
     {
         //I'm decoupling the values from GameplaySettings so if I change them outside of this script I have to look only in one place
-        gameplaySettings = GameplaySettings.singleton;
-        spawnPosition = gameplaySettings.spawnPosition.position;
-        Vector3 playerPosition = gameplaySettings.player.transform.position;
+        gameplaySettings = cubeManager.settingsProvider.gameplaySettings;
+        spawnPosition = gameplaySettings.cubeSpawnPosition.position;
+        Vector3 playerPosition = gameplaySettings.playerSpawnPosition.transform.position;
         targetPosition = playerPosition - spawnPosition;
         destroyValue = playerPosition.z + gameplaySettings.distanceBeforeDestroying;
         beatsToTravel = gameplaySettings.beatsInAdvance;
