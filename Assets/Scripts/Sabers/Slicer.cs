@@ -8,22 +8,19 @@ using UnityEngine.XR;
 
 public class Slicer : MonoBehaviour
 {
-    private SaberManager saber;
+    private SaberController saber;
 
     private void Start()
     {
-        Assert.IsNotNull(GetComponentInParent<SaberManager>());
-        saber = GetComponentInParent<SaberManager>();
-        
+        Assert.IsNotNull(GetComponentInParent<SaberController>());
+        saber = GetComponentInParent<SaberController>();      
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-
         StartCoroutine("SliceRoutine", collision);
-
     }
-    /*This WON'T be the way-to-go method. It might be moved to CubeManager, and it will be just a backup method (the slice direction will be determined with OnCollisionEnter-OnCollisionExit methods)*/
+    /*This WON'T be the way-to-go method. It might be moved to CubeController, and it will be just a backup method (the slice direction will be determined with OnCollisionEnter-OnCollisionExit methods)*/
     IEnumerator SliceRoutine(Collision collision)
     {
         //saves the blade up vector on collision
@@ -34,11 +31,9 @@ public class Slicer : MonoBehaviour
         Vector3 endBladeRotation = saber.transform.up.normalized;
         // the cross product of the two vector gives the normal of the plane they reside in.
         Vector3 cuttingPlaneNormal = Vector3.Cross(startBladeRotation, endBladeRotation).normalized;
-        if (sliceTarget.TryGetComponent(out CubeManager cube))
+        if (sliceTarget.TryGetComponent(out CubeController cube))
         {
             cube.Slice(sliceTarget, saber.transform.position, cuttingPlaneNormal);
         }       
     }
-
-    
 }

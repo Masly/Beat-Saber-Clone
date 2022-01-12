@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour,IAudioService
+public class TrackService : MonoBehaviour,ITrackService
 {   
     private float currentBeat;
     [SerializeField]
@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour,IAudioService
     double secondsPlaying;
     double songStart;
 
-    float IAudioService.currentBeat => currentBeat;
+    float ITrackService.currentBeat => currentBeat;
 
     // Start is called before the first frame update
     void Start()

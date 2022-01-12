@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 
-public class VibrationManager : MonoBehaviour, IVibrationService
+public class VibrationService : MonoBehaviour, IVibrationService
 {
 
     [SerializeField]

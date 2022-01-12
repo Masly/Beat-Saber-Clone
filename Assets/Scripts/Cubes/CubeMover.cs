@@ -5,27 +5,26 @@ using UnityEngine.Assertions;
 
 public class CubeMover : MonoBehaviour
 {
+    [HideInInspector]
     public int beatSpawned;
     //this will be injected on creation for now
     private Vector3 spawnPosition;
     private Vector3 targetPosition;
     //value of z needed before destroying the cube
-    public float destroyValue;
-    
+    private float destroyValue;
     private int beatsToTravel;
-    public bool debug = false;
-    private CubeManager cubeManager;
+    private CubeController cubeController;
     private GameplaySettings gameplaySettings;
     private void Awake()
     {
-        cubeManager = GetComponent<CubeManager>();
-        Assert.IsNotNull(cubeManager);
+        cubeController = GetComponent<CubeController>();
+        Assert.IsNotNull(cubeController);
     }
 
     private void Start()
     {
         //I'm decoupling the values from GameplaySettings so if I change them outside of this script I have to look only in one place
-        gameplaySettings = cubeManager.settingsProvider.gameplaySettings;
+        gameplaySettings = cubeController.settingsProvider.gameplaySettings;
         spawnPosition = gameplaySettings.cubeSpawnPosition.position;
         Vector3 playerPosition = gameplaySettings.playerSpawnPosition.transform.position;
         targetPosition = playerPosition - spawnPosition;
@@ -33,7 +32,6 @@ public class CubeMover : MonoBehaviour
         beatsToTravel = gameplaySettings.beatsInAdvance;
 
     }
-    // Update is called once per frame
     void FixedUpdate()
     {
             SetPosition();
@@ -45,9 +43,8 @@ public class CubeMover : MonoBehaviour
     void SetPosition()
     {
         Vector3 newPosition = spawnPosition;
-        float BeatsSinceSpawned = cubeManager.serviceProvider.audioService.currentBeat - beatSpawned;
+        float BeatsSinceSpawned = cubeController.serviceProvider.audioService.currentBeat - beatSpawned;
         float lerpValue;
-        
         
         if (BeatsSinceSpawned <= 0)
         {
@@ -60,14 +57,6 @@ public class CubeMover : MonoBehaviour
             {
                 newPosition.z = Mathf.Lerp(spawnPosition.z, targetPosition.z, lerpValue);
 
-            }
-            //vibrate when on center if debugging
-            if (debug)
-            {
-                if (Mathf.Abs(lerpValue - 0.5f) <= 0.01)
-                {
-                    cubeManager.serviceProvider.vibrationService.CustomVibrate(0.5f, 0.01f);
-                }
             }
         }
 

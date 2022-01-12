@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /*all saber data will be here*/
-public class SaberManager : MonoBehaviour
+public class SaberController : MonoBehaviour
 {
     public GameObject blade;
     public bool isLeft;

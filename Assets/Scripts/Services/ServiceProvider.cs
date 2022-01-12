@@ -24,7 +24,7 @@ public class ServiceProvider : MonoBehaviour
         vibrationService = new VibrationHandle(GetComponent<IVibrationService>());
         //https://stackoverflow.com/questions/56618167/how-to-check-a-script-for-unity-inspector-null-parameters-and-incorrect-values this could be a nice way to check every field
         Assert.IsNotNull(vibrationService);
-        audioService = new AudioHandle(GetComponent<IAudioService>());
+        audioService = new AudioHandle(GetComponent<ITrackService>());
         Assert.IsNotNull(audioService);
         scoreService = new ScoreHandle(GetComponent<IScoreService>());
         Assert.IsNotNull(scoreService);
@@ -45,11 +45,11 @@ public class ServiceProvider : MonoBehaviour
 
     public class AudioHandle
     {
-        public AudioHandle(IAudioService impl)
+        public AudioHandle(ITrackService impl)
         {
             audioServiceImplementation = impl;
         }
-        private readonly IAudioService audioServiceImplementation;
+        private readonly ITrackService audioServiceImplementation;
 
         public float currentBeat => audioServiceImplementation.currentBeat;
     }
